@@ -2,6 +2,10 @@
 
 A collaborative workshop to learn how to use Substrate
 
+> Try this in our embedded playground environment!
+>
+> https://www.shawntabrizi.com/substrate-playground-tutorial/
+
 ## Overview 
 
 1. Getting started with Substrate

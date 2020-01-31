@@ -1,13 +1,20 @@
 # Getting Started
 
-Please complete the instructions on this page before attending the [Parity Substrate](https://www.parity.io/substrate/) workshop. You only need to complete this one page, we will look at the other pages during the workshop.
+You do not need to set up ANYTHING to run through this tutorial. Just go to:
 
-If you have any problems with the instructions on this page, feel free to send us an email at:
+https://www.shawntabrizi.com/substrate-playground-tutorial/
+
+and you will find this same tutorial with an embedded [Substrate Playground](https://github.com/paritytech/substrate-playground) environment.
+
+## Run Locally
+
+If you want to run this workshop on your local computer that works too! You will just need to set it up, which may take up to **30-45 minutes**.
+
+If you have any problems with the instructions on this page, feel free to send an email to:
 
 * shawn@parity.io
-* joshy@parity.io
 
-## Instructions
+### Instructions
 
 1. Install Substrate Dependencies:
 
