@@ -23,7 +23,7 @@ The [`Currency` trait](https://substrate.dev/rustdocs/master/srml_support/traits
 ## Use
 
 ```rust
-use support::traits::Currency;
+use frame_support::traits::Currency;
 ```
 
 <!-- slide:break -->
@@ -45,5 +45,5 @@ The [`ReservableCurrency` trait](https://substrate.dev/rustdocs/master/srml_supp
 ## Use
 
 ```rust
-use support::traits::ReservableCurrency;
+use frame_support::traits::ReservableCurrency;
 ```

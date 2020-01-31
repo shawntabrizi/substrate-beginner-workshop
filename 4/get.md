@@ -7,7 +7,7 @@ Rather than hard-code the fee of our module, we can also allow that to be a conf
 We define a simple trait called `Get` for querying a single fixed value from a type.
 
 ```rust
-use support::traits::Get;
+use frame_support::traits::Get;
 ```
 
 ## Balance Type
@@ -26,7 +26,7 @@ type BalanceOf<T> =
 For this we need:
 
 ```rust
-use support::traits::Currency;
+use frame_support::traits::Currency;
 ```
 
 <!-- slide:break -->

@@ -37,11 +37,11 @@ fn create_claim(origin, proof: Vec<u8>) {
 }
 ```
 
-#### ** Hint: Check **
+#### ** Hint: Check + Error **
 
 > **Note:** You need to import:
 > * `system::ensure_signed`
-> * `support::ensure`
+> * `frame_support::ensure`
 
 ```rust
 // Verify that the incoming transaction is signed and store who the
@@ -49,7 +49,18 @@ fn create_claim(origin, proof: Vec<u8>) {
 let sender = ensure_signed(origin)?;
 
 // Verify that the specified proof has not been claimed yet or error with the message
-ensure!(!Proofs::<T>::exists(&proof), "This proof has already been claimed.");
+ensure!(!Proofs::<T>::exists(&proof), Error::<T>::AlreadyClaimed);
+```
+
+Don't forget to add your new error!
+
+```rust
+decl_error! {
+	pub enum Error for Module<T: Trait> {
+		/// This proof is already claimed.
+		AlreadyClaimed,
+	}
+}
 ```
 
 #### ** Hint: Logic **
@@ -72,8 +83,8 @@ Self::deposit_event(RawEvent::ClaimCreated(sender, proof));
 #### ** Solution **
 
 ```rust
-use support::{decl_storage, decl_module, decl_event, ensure};
-use rstd::prelude::Vec;
+use frame_support::{decl_storage, decl_module, decl_event, decl_error, ensure};
+use sp_std::prelude::Vec;
 use system::ensure_signed;
 
 pub trait Trait: system::Trait {
@@ -106,7 +117,7 @@ decl_module! {
 			let sender = ensure_signed(origin)?;
 
 			// Verify that the specified proof has not been claimed yet or error with the message
-			ensure!(!Proofs::<T>::exists(&proof), "This proof has already been claimed.");
+			ensure!(!Proofs::<T>::exists(&proof), Error::<T>::AlreadyClaimed);
 
 			// Call the `system` runtime module to get the current block number
 			let current_block = <system::Module<T>>::block_number();
@@ -117,6 +128,13 @@ decl_module! {
 			// Emit an event that the claim was created
 			Self::deposit_event(RawEvent::ClaimCreated(sender, proof));
 		}
+	}
+}
+
+decl_error! {
+	pub enum Error for Module<T: Trait> {
+		/// This proof is already claimed.
+		AlreadyClaimed,
 	}
 }
 ```

@@ -47,10 +47,10 @@ Click the other tabs to view hints.
 #### ** Final Code **
 
 ```rust
-use support::{decl_module, decl_storage, decl_event, ensure};
-use rstd::vec::Vec;
+use frame_support::{decl_module, decl_storage, decl_event, decl_error, ensure};
+use sp_std::prelude::Vec;
 use system::ensure_signed;
-use support::traits::ReservableCurrency;
+use frame_support::traits::ReservableCurrency;
 
 /// The module's configuration trait.
 pub trait Trait: system::Trait {
@@ -93,7 +93,7 @@ decl_module! {
 			let sender = ensure_signed(origin)?;
 
 			// Verify that the specified proof has not been claimed yet or error with the message
-			ensure!(!Proofs::<T>::exists(&proof), "This proof has already been claimed.");
+			ensure!(!Proofs::<T>::exists(&proof), Error::<T>::AlreadyClaimed);
 
 			// Try to reserve the deposit from the user
 			T::Currency::reserve(&sender, 1000.into())?;
@@ -114,13 +114,13 @@ decl_module! {
 			let sender = ensure_signed(origin)?;
 
 			// Verify that the specified proof has been claimed
-			ensure!(Proofs::<T>::exists(&proof), "This proof has not been stored yet.");
+			ensure!(Proofs::<T>::exists(&proof), Error::<T>::NotClaimed);
 
 			// Get owner of the claim
 			let (owner, _) = Proofs::<T>::get(&proof);
 
 			// Verify that sender of the current call is the claim owner
-			ensure!(sender == owner, "You must own this claim to revoke it.");
+			ensure!(sender == owner, Error::<T>::NotOwner);
 
 			// Unreserve the deposit from the user
 			T::Currency::unreserve(&sender, 1000.into());
@@ -131,6 +131,17 @@ decl_module! {
 			// Emit an event that the claim was erased
 			Self::deposit_event(RawEvent::ClaimRevoked(sender, proof));
 		}
+	}
+}
+
+decl_error! {
+	pub enum Error for Module<T: Trait> {
+		/// This proof is already claimed.
+		AlreadyClaimed,
+		/// This claim has not been claimed yet.
+		NotClaimed,
+		/// You do not own this claim.
+		NotOwner,
 	}
 }
 ```

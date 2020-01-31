@@ -31,7 +31,7 @@ substrate-node-template
 Replace the content in this file with this starting point:
 
 ```rust
-use support::{decl_module, decl_storage, decl_event};
+use frame_frame_support::{decl_module, decl_storage, decl_event, decl_error};
 
 pub trait Trait: system::Trait {
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
@@ -40,6 +40,7 @@ pub trait Trait: system::Trait {
 decl_event! {
 	pub enum Event<T> where AccountId = <T as system::Trait>::AccountId {
 		// Events 
+        Dummy(AccountId), // This is a temporary event to make things compile :)
 	}
 }
 
@@ -52,6 +53,12 @@ decl_storage! {
 decl_module! {
 	pub struct Module<T: Trait> for enum Call where origin: T::Origin {
 		// Functions
+	}
+}
+
+decl_error! {
+	pub enum Error for Module<T: Trait> {
+		// Errors
 	}
 }
 ```
