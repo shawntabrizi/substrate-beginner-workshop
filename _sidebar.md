@@ -4,11 +4,12 @@
 * [Getting Started](0/)
 	* [Presentation](0/presentation.md)
 
-* [Start a Network Together](1/)
-	* [Use the Network](1/use.md)
-	* [View Public Telemetry](1/telemetry.md)
-	* [Join the Network](1/join.md)
-	* [Interact with Your Node](1/interact.md)
+* [Using the Substrate Playground](playground/)
+	* [About](playground/intro.md)
+	* [Sessions](playground/sessions.md)
+	* [Start Node](playground/start-node.md)
+	* [Interact](playground/interact.md)
+	* [Common](playground/common.md)
 
 * [Writing a Module](2/)
 	* [Presentation](2/presentation.md)
@@ -18,7 +19,6 @@
 	* [Create Claim](2/create-claim.md)
 	* [Revoke Claim](2/revoke-claim.md)
 	* [Final Runtime](2/final.md)
-
 
 * [Upgrading Your Runtime](3/)
 	* [Make a Claim](3/make-claim.md)
