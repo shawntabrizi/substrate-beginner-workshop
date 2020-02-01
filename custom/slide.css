@@ -37,3 +37,22 @@
     width: 100% !important;
   }
 }
+
+
+/* Fix `close` style on mobile */
+
+@media screen and (max-width: 768px) {
+  body .sidebar {
+    transform: translateX(300px) !important;
+  }
+  body .content {
+    transform: translateX(300px) !important;
+  }
+
+  body.close .sidebar {
+    transform: translateX(0) !important;
+  }
+  body.close .content {
+    transform: translateX(0px) !important;
+  }
+}
